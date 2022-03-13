@@ -7,5 +7,5 @@ In order to get this working for your own bot, you need the following:
     - hikari
     - hikari-lightbulb
     - Flask
-- **Ensure** that you `[tool.poetry.dependencies]` contains this line:
+- **Ensure** that your `[tool.poetry.dependencies]` contains this line:
     - `python = ">=3.8,<3.11"`
