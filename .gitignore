@@ -94,6 +94,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+BeeperEnv/
 
 # Spyder project settings
 .spyderproject
