@@ -247,9 +247,5 @@ def die_roll(dice_type: int, num_of_dice: int) -> CompletedRoll:
 
 
 if __name__ == "__main__":
-    if os.name != "nt":
-        import uvloop
-        uv.loop.install()
-
     keep_alive()
     bot.run()
