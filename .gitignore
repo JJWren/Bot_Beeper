@@ -94,9 +94,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-BeeperEnv/
-Scripts/
-BeeperEnv/Scripts/activate
 
 # Spyder project settings
 .spyderproject
