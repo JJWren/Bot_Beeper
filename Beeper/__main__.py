@@ -90,7 +90,7 @@ async def hello(ctx: lightbulb.Context) -> None:
 @wave_group.child
 @lightbulb.command('b', 'Bye command.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
-async def hello(ctx: lightbulb.Context) -> None:
+async def bye(ctx: lightbulb.Context) -> None:
     # Me
     if ctx.author.id == ID_ME:
         await ctx.respond('https://tenor.com/view/obi-wan-obi-wan-kenobi-hello-there-goodbye-there-hello-gif-24946322')
