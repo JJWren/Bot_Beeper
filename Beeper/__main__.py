@@ -5,7 +5,7 @@ import lightbulb
 import random
 from unicodedata import decimal
 from datetime import datetime as dt
-from Beeper import GUILD_ID, STDOUT_CHANNEL_ID
+from Beeper import GUILD_ID, STDOUT_CHANNEL_ID, FAMILY_IDS
 
 # Gets Token from token.env file inside secrets folder (1 level up)
 with open("./BeeperEnv/Secrets/token.env") as f:
@@ -56,19 +56,19 @@ async def wave_group(ctx: lightbulb.Context) -> None:
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def hello(ctx: lightbulb.Context) -> None:
     # Me
-    if ctx.author.id == 267137559275110402:
+    if ctx.author.id == FAMILY_IDS[0]:
         await ctx.respond('https://tenor.com/view/star-wars-hello-there-hello-obi-wan-kenobi-gif-13903117')
     # Evie
-    elif ctx.author.id == 378572820223098880:
+    elif ctx.author.id == FAMILY_IDS[1]:
         await ctx.respond('WHAT IS UP MY BIZNITCHES?!\nhttps://tenor.com/view/whats-up-wazzup-scary-movie-scream-gif-16474707')
     # Chris
-    elif ctx.author.id == 221688491384242176:
+    elif ctx.author.id == FAMILY_IDS[2]:
         await ctx.respond('https://tenor.com/view/forrest-gump-hello-wave-hi-waving-gif-22571528')
     # Mom
-    elif ctx.author.id == 899390089875042375:
+    elif ctx.author.id == FAMILY_IDS[3]:
         await ctx.respond('*Puppy Wave*...\nhttps://tenor.com/view/hi-gingin-hi-in-french-dog-pet-lick-gif-17055714')
     # Dad
-    elif ctx.author.id == 898929950193762314:
+    elif ctx.author.id == FAMILY_IDS[4]:
         await ctx.respond('https://tenor.com/view/bugs-bunny-carrot-super-man-cape-gif-5666757')
 
 
@@ -77,19 +77,19 @@ async def hello(ctx: lightbulb.Context) -> None:
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def hello(ctx: lightbulb.Context) -> None:
     # Me
-    if ctx.author.id == 267137559275110402:
+    if ctx.author.id == FAMILY_IDS[0]:
         await ctx.respond('https://tenor.com/view/obi-wan-obi-wan-kenobi-hello-there-goodbye-there-hello-gif-24946322')
     # Evie
-    elif ctx.author.id == 378572820223098880:
+    elif ctx.author.id == FAMILY_IDS[1]:
         await ctx.respond(f'{random.choice(["https://tenor.com/view/suck-yousuck-sucka-sucker-simpsons-gif-4700420", "https://tenor.com/view/spongebob-plankton-goodbye-everyone-ill-remember-you-all-in-therapy-therapy-gif-21654437"])}')
     # Chris
-    elif ctx.author.id == 221688491384242176:
+    elif ctx.author.id == FAMILY_IDS[2]:
         await ctx.respond('https://tenor.com/view/awkward-the-simpsons-weirdo-roll-goodbye-gif-16982419')
     # Mom
-    elif ctx.author.id == 899390089875042375:
+    elif ctx.author.id == FAMILY_IDS[3]:
         await ctx.respond('https://tenor.com/view/im-done-goodbye-the-office-ciao-gif-10583001')
     # Dad
-    elif ctx.author.id == 898929950193762314:
+    elif ctx.author.id == FAMILY_IDS[4]:
         await ctx.respond('https://tenor.com/view/are-you-stupid-head-shake-farted-fart-gif-12278020')
 # endregion
 
