@@ -122,13 +122,14 @@ async def roll_group(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d4', 'A four-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d4(ctx: lightbulb.Context) -> None:
-    if ctx.options.num > 500:
+    num_of_die_rolled = int(ctx.options.num, base=10)
+    if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
     die_type = 4
-    compl_roll = die_roll(die_type, int(ctx.options.num))
+    compl_roll = die_roll(die_type, num_of_die_rolled)
 
-    await ctx.respond(f'{ctx.author.username} rolled {ctx.options.num} {ctx.invoked.qualname}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}')
+    await ctx.respond(f'{ctx.author.username} -> {ctx.invoked.qualname} x {num_of_die_rolled}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}')
 
 
 @roll_group.child
@@ -136,13 +137,14 @@ async def d4(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d6', 'A six-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d6(ctx: lightbulb.Context) -> None:
-    if ctx.options.num > 500:
+    num_of_die_rolled = int(ctx.options.num, base=10)
+    if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
     die_type = 6
-    compl_roll = die_roll(die_type, int(ctx.options.num))
+    compl_roll = die_roll(die_type, num_of_die_rolled)
 
-    await ctx.respond(f'{ctx.author.username} -> {ctx.invoked.qualname} x {ctx.options.num}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}')
+    await ctx.respond(f'{ctx.author.username} -> {ctx.invoked.qualname} x {num_of_die_rolled}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}')
 
 
 @roll_group.child
@@ -150,13 +152,14 @@ async def d6(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d8', 'An eight-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d8(ctx: lightbulb.Context) -> None:
-    if ctx.options.num > 500:
+    num_of_die_rolled = int(ctx.options.num, base=10)
+    if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
     die_type = 8
-    compl_roll = die_roll(die_type, int(ctx.options.num))
+    compl_roll = die_roll(die_type, num_of_die_rolled)
 
-    await ctx.respond(f'{ctx.author.username} -> {ctx.invoked.qualname} x {ctx.options.num}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}')
+    await ctx.respond(f'{ctx.author.username} -> {ctx.invoked.qualname} x {num_of_die_rolled}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}')
 
 
 @roll_group.child
@@ -164,13 +167,14 @@ async def d8(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d10', 'A ten-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d10(ctx: lightbulb.Context) -> None:
-    if ctx.options.num > 500:
+    num_of_die_rolled = int(ctx.options.num, base=10)
+    if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
     die_type = 10
-    compl_roll = die_roll(die_type, int(ctx.options.num))
+    compl_roll = die_roll(die_type, num_of_die_rolled)
 
-    await ctx.respond(f'{ctx.author.username} -> {ctx.invoked.qualname} x {ctx.options.num}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}')
+    await ctx.respond(f'{ctx.author.username} -> {ctx.invoked.qualname} x {num_of_die_rolled}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}')
 
 
 @roll_group.child
@@ -178,13 +182,14 @@ async def d10(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d12', 'A twelve-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d12(ctx: lightbulb.Context) -> None:
-    if ctx.options.num > 500:
+    num_of_die_rolled = int(ctx.options.num, base=10)
+    if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
     die_type = 12
-    compl_roll = die_roll(die_type, int(ctx.options.num))
+    compl_roll = die_roll(die_type, num_of_die_rolled)
 
-    await ctx.respond(f'{ctx.author.username} -> {ctx.invoked.qualname} x {ctx.options.num}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}')
+    await ctx.respond(f'{ctx.author.username} -> {ctx.invoked.qualname} x {num_of_die_rolled}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}')
 
 
 @roll_group.child
@@ -192,13 +197,14 @@ async def d12(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d20', 'A twenty-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d20(ctx: lightbulb.Context) -> None:
-    if ctx.options.num > 500:
+    num_of_die_rolled = int(ctx.options.num, base=10)
+    if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
     die_type = 20
-    compl_roll = die_roll(die_type, int(ctx.options.num))
+    compl_roll = die_roll(die_type, num_of_die_rolled)
 
-    message_response = f'{ctx.author.username} -> {ctx.invoked.qualname} x {ctx.options.num}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}\r'
+    message_response = f'{ctx.author.username} -> {ctx.invoked.qualname} x {num_of_die_rolled}:\r\tRolls: {compl_roll.rolls}\r\tTotal: {compl_roll.total}\r\tAverage: {compl_roll.average}\r'
     if compl_roll.had_critfail and compl_roll.had_nat20:
         message_response += 'A critical fail and natural 20 occurred...\r'
         message_response += 'https://tenor.com/view/happy-sad-despair-snusnu-prisoners-gif-8671067'
