@@ -1,3 +1,4 @@
+# region [Imports]
 from decimal import *
 import os
 import hikari
@@ -7,8 +8,10 @@ from dotenv import load_dotenv
 from pathlib import Path
 from unicodedata import decimal
 from datetime import datetime as dt
+from keep_alive import keep_alive
+# endregion
 
-#region [Gather env secrets]
+# region [Gather env secrets]
 dotenv_path = Path('env\SECRETS.env')
 load_dotenv(dotenv_path=dotenv_path)
 
@@ -20,8 +23,9 @@ ID_SIS = os.getenv('ID_SIS')
 ID_BRO = os.getenv('ID_BRO')
 ID_MA = os.getenv('ID_MA')
 ID_PA = os.getenv('ID_PA')
-#endregion
+# endregion
 
+# region [Bot initialization and error event]
 bot = lightbulb.BotApp(
     token=BOT_TOKEN,
     default_enabled_guilds=ID_GUILD_FAMILY
@@ -51,10 +55,10 @@ async def on_error(event: lightbulb.CommandErrorEvent) -> None:
         await event.context.respond(f"This command is on cooldown. Retry in `{exception.retry_after:.2f}` seconds.")
     else:
         raise exception
+# endregion
 
-#region [GROUP /wave]
 
-
+# region [GROUP /wave]
 @bot.command
 @lightbulb.command('wave', '"Hello" and "bye" commands.')
 @lightbulb.implements(lightbulb.SlashCommandGroup)
@@ -105,7 +109,7 @@ async def hello(ctx: lightbulb.Context) -> None:
 # endregion
 
 
-#region [GROUP /roll]
+# region [GROUP /roll]
 @bot.command
 @lightbulb.command('roll', 'Roll some dice.')
 @lightbulb.implements(lightbulb.SlashCommandGroup)
@@ -253,4 +257,5 @@ if __name__ == "__main__":
         import uvloop
         uv.loop.install()
 
+    keep_alive()
     bot.run()
