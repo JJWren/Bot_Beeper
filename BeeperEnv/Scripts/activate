@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Wrenpo\Desktop\DiscordBots\Beeper\BeeperEnv"
+VIRTUAL_ENV="C:\Users\Wrenpo\Documents\GitHub\Repositories\Bot_Beeper\BeeperEnv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
