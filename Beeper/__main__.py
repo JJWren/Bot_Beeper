@@ -1,19 +1,34 @@
+# region [Imports]
 from decimal import *
 import os
 import hikari
 import lightbulb
 import random
+from dotenv import load_dotenv
+from pathlib import Path
 from unicodedata import decimal
 from datetime import datetime as dt
-from Beeper import GUILD_ID, STDOUT_CHANNEL_ID, FAMILY_IDS
+from keep_alive import keep_alive
+# endregion
 
-# Gets Token from token.env file inside secrets folder (1 level up)
-with open("./BeeperEnv/Secrets/token.txt") as f:
-    _token = f.read().strip()
+# region [Gather env secrets]
+dotenv_path = Path('env\SECRETS.env')
+load_dotenv(dotenv_path=dotenv_path)
 
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+ID_GUILD_FAMILY = os.getenv('ID_GUILD_FAMILY')
+ID_CHANNEL_STDOUT_FAMILY = os.getenv('ID_CHANNEL_STDOUT_FAMILY')
+ID_ME = os.getenv('ID_ME')
+ID_SIS = os.getenv('ID_SIS')
+ID_BRO = os.getenv('ID_BRO')
+ID_MA = os.getenv('ID_MA')
+ID_PA = os.getenv('ID_PA')
+# endregion
+
+# region [Bot initialization and error event]
 bot = lightbulb.BotApp(
-    token=_token,
-    default_enabled_guilds=GUILD_ID
+    token=BOT_TOKEN,
+    default_enabled_guilds=ID_GUILD_FAMILY
 )
 
 bot.load_extensions_from("./Beeper/extensions")
@@ -21,7 +36,7 @@ bot.load_extensions_from("./Beeper/extensions")
 
 @bot.listen(hikari.StartedEvent)
 async def bot_started(event: hikari.StartedEvent) -> None:
-    beepers_door = await bot.rest.fetch_channel(STDOUT_CHANNEL_ID)
+    beepers_door = await bot.rest.fetch_channel(ID_CHANNEL_STDOUT_FAMILY)
     await beepers_door.send(f'[{dt.now}] Hello Wren Family! Beeper is alive and running now!')
 
 
@@ -40,10 +55,10 @@ async def on_error(event: lightbulb.CommandErrorEvent) -> None:
         await event.context.respond(f"This command is on cooldown. Retry in `{exception.retry_after:.2f}` seconds.")
     else:
         raise exception
+# endregion
 
-#region [GROUP /wave]
 
-
+# region [GROUP /wave]
 @bot.command
 @lightbulb.command('wave', '"Hello" and "bye" commands.')
 @lightbulb.implements(lightbulb.SlashCommandGroup)
@@ -56,19 +71,19 @@ async def wave_group(ctx: lightbulb.Context) -> None:
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def hello(ctx: lightbulb.Context) -> None:
     # Me
-    if ctx.author.id == FAMILY_IDS[0]:
+    if ctx.author.id == ID_ME:
         await ctx.respond('https://tenor.com/view/star-wars-hello-there-hello-obi-wan-kenobi-gif-13903117')
     # Evie
-    elif ctx.author.id == FAMILY_IDS[1]:
+    elif ctx.author.id == ID_SIS:
         await ctx.respond('WHAT IS UP MY BIZNITCHES?!\nhttps://tenor.com/view/whats-up-wazzup-scary-movie-scream-gif-16474707')
     # Chris
-    elif ctx.author.id == FAMILY_IDS[2]:
+    elif ctx.author.id == ID_BRO:
         await ctx.respond('https://tenor.com/view/forrest-gump-hello-wave-hi-waving-gif-22571528')
     # Mom
-    elif ctx.author.id == FAMILY_IDS[3]:
+    elif ctx.author.id == ID_MA:
         await ctx.respond('*Puppy Wave*...\nhttps://tenor.com/view/hi-gingin-hi-in-french-dog-pet-lick-gif-17055714')
     # Dad
-    elif ctx.author.id == FAMILY_IDS[4]:
+    elif ctx.author.id == ID_PA:
         await ctx.respond('https://tenor.com/view/bugs-bunny-carrot-super-man-cape-gif-5666757')
 
 
@@ -77,24 +92,24 @@ async def hello(ctx: lightbulb.Context) -> None:
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def hello(ctx: lightbulb.Context) -> None:
     # Me
-    if ctx.author.id == FAMILY_IDS[0]:
+    if ctx.author.id == ID_ME:
         await ctx.respond('https://tenor.com/view/obi-wan-obi-wan-kenobi-hello-there-goodbye-there-hello-gif-24946322')
     # Evie
-    elif ctx.author.id == FAMILY_IDS[1]:
+    elif ctx.author.id == ID_SIS:
         await ctx.respond(f'{random.choice(["https://tenor.com/view/suck-yousuck-sucka-sucker-simpsons-gif-4700420", "https://tenor.com/view/spongebob-plankton-goodbye-everyone-ill-remember-you-all-in-therapy-therapy-gif-21654437"])}')
     # Chris
-    elif ctx.author.id == FAMILY_IDS[2]:
+    elif ctx.author.id == ID_BRO:
         await ctx.respond('https://tenor.com/view/awkward-the-simpsons-weirdo-roll-goodbye-gif-16982419')
     # Mom
-    elif ctx.author.id == FAMILY_IDS[3]:
+    elif ctx.author.id == ID_MA:
         await ctx.respond('https://tenor.com/view/im-done-goodbye-the-office-ciao-gif-10583001')
     # Dad
-    elif ctx.author.id == FAMILY_IDS[4]:
+    elif ctx.author.id == ID_PA:
         await ctx.respond('https://tenor.com/view/are-you-stupid-head-shake-farted-fart-gif-12278020')
 # endregion
 
 
-#region [GROUP /roll]
+# region [GROUP /roll]
 @bot.command
 @lightbulb.command('roll', 'Roll some dice.')
 @lightbulb.implements(lightbulb.SlashCommandGroup)
@@ -242,4 +257,5 @@ if __name__ == "__main__":
         import uvloop
         uv.loop.install()
 
+    keep_alive()
     bot.run()
