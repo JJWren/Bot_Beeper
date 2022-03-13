@@ -71,19 +71,19 @@ async def wave_group(ctx: lightbulb.Context) -> None:
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def hello(ctx: lightbulb.Context) -> None:
     # Me
-    if ctx.author.id == ID_ME:
+    if str(ctx.user.id) == str(ID_ME):
         await ctx.respond('https://tenor.com/view/star-wars-hello-there-hello-obi-wan-kenobi-gif-13903117')
     # Evie
-    elif ctx.author.id == ID_SIS:
+    elif str(ctx.user.id) == str(ID_SIS):
         await ctx.respond('WHAT IS UP MY BIZNITCHES?!\nhttps://tenor.com/view/whats-up-wazzup-scary-movie-scream-gif-16474707')
     # Chris
-    elif ctx.author.id == ID_BRO:
+    elif str(ctx.user.id) == str(ID_BRO):
         await ctx.respond('https://tenor.com/view/forrest-gump-hello-wave-hi-waving-gif-22571528')
     # Mom
-    elif ctx.author.id == ID_MA:
+    elif str(ctx.user.id) == str(ID_MA):
         await ctx.respond('*Puppy Wave*...\nhttps://tenor.com/view/hi-gingin-hi-in-french-dog-pet-lick-gif-17055714')
     # Dad
-    elif ctx.author.id == ID_PA:
+    elif str(ctx.user.id) == str(ID_PA):
         await ctx.respond('https://tenor.com/view/bugs-bunny-carrot-super-man-cape-gif-5666757')
 
 
@@ -92,19 +92,19 @@ async def hello(ctx: lightbulb.Context) -> None:
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def bye(ctx: lightbulb.Context) -> None:
     # Me
-    if ctx.author.id == ID_ME:
+    if str(ctx.user.id) == str(ID_ME):
         await ctx.respond('https://tenor.com/view/obi-wan-obi-wan-kenobi-hello-there-goodbye-there-hello-gif-24946322')
     # Evie
-    elif ctx.author.id == ID_SIS:
+    elif str(ctx.user.id) == str(ID_SIS):
         await ctx.respond(f'{random.choice(["https://tenor.com/view/suck-yousuck-sucka-sucker-simpsons-gif-4700420", "https://tenor.com/view/spongebob-plankton-goodbye-everyone-ill-remember-you-all-in-therapy-therapy-gif-21654437"])}')
     # Chris
-    elif ctx.author.id == ID_BRO:
+    elif str(ctx.user.id) == str(ID_BRO):
         await ctx.respond('https://tenor.com/view/awkward-the-simpsons-weirdo-roll-goodbye-gif-16982419')
     # Mom
-    elif ctx.author.id == ID_MA:
+    elif str(ctx.user.id) == str(ID_MA):
         await ctx.respond('https://tenor.com/view/im-done-goodbye-the-office-ciao-gif-10583001')
     # Dad
-    elif ctx.author.id == ID_PA:
+    elif str(ctx.user.id) == str(ID_PA):
         await ctx.respond('https://tenor.com/view/are-you-stupid-head-shake-farted-fart-gif-12278020')
 # endregion
 
