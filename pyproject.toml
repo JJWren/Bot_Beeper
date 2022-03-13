@@ -12,7 +12,7 @@ version = "0.1.0"
 Flask = "^2.0.3"
 hikari = "^2.0.0-alpha.107"
 hikari-lightbulb = "^2.2.0"
-python = ">=3.8.0,<3.11"
+python = "^3.8"
 [tool.poetry.dev-dependencies]
 Flask = "^2.0.3"
 hikari = "^2.0.0-alpha.107"
