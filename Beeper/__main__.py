@@ -31,7 +31,7 @@ bot.load_extensions_from("./Beeper/extensions")
 @bot.listen(hikari.StartedEvent)
 async def bot_started(event: hikari.StartedEvent) -> None:
     beepers_door = await bot.rest.fetch_channel(ID_CHANNEL_STDOUT_FAMILY)
-    await beepers_door.send(f'[{dt.now().strftime("%Y-%m-%d %H:%M:%S")}] Hello Wren Family! I am alive and running now!')
+    await beepers_door.send(f'[{dt.now().strftime("%Y-%m-%d %H:%M:%S")}] Hello! I am alive and running now!')
 
 
 @bot.listen(lightbulb.CommandErrorEvent)
@@ -79,6 +79,8 @@ async def hello(ctx: lightbulb.Context) -> None:
     # Dad
     elif str(ctx.user.id) == str(ID_PA):
         await ctx.respond('https://tenor.com/view/bugs-bunny-carrot-super-man-cape-gif-5666757')
+    else:
+        await ctx.respond(f'{random.choice(["https://tenor.com/view/forrest-gump-hello-wave-hi-waving-gif-22571528", "https://tenor.com/view/napoleon-dynamite-wave-bye-gif-15387504", "https://tenor.com/view/hey-there-turn-around-sassy-fabulous-hair-flip-gif-16899626"])}')
 
 
 @wave_group.child
@@ -100,6 +102,8 @@ async def bye(ctx: lightbulb.Context) -> None:
     # Dad
     elif str(ctx.user.id) == str(ID_PA):
         await ctx.respond('https://tenor.com/view/are-you-stupid-head-shake-farted-fart-gif-12278020')
+    else:
+        await ctx.respond(f'{random.choice(["https://tenor.com/view/awkward-the-simpsons-weirdo-roll-goodbye-gif-16982419", "https://tenor.com/view/ahaha-wave-bye-fearless-im-out-gif-14503554", "https://tenor.com/view/spongebob-plankton-goodbye-everyone-ill-remember-you-all-in-therapy-therapy-gif-21654437"])}')
 # endregion
 
 

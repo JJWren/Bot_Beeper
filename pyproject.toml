@@ -1,17 +1,16 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+
+[tool]
 [tool.poetry]
+authors = ["JJWren <<>>"]
+description = ""
 name = "botbeeper"
 version = "0.1.0"
-description = ""
-authors = ["JJWren <<>>"]
-
 [tool.poetry.dependencies]
-python = ">=3.8,<3.11"
 Flask = "^2.0.3"
 hikari = "^2.0.0-alpha.107"
 hikari-lightbulb = "^2.2.0"
-
+python = "^3.8"
 [tool.poetry.dev-dependencies]
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
