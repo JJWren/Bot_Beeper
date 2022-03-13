@@ -9,14 +9,14 @@ from keep_alive import keep_alive
 # endregion
 
 # region [Gather env secrets]
-BOT_TOKEN = os.environ('BOT_TOKEN')
-ID_GUILD_FAMILY = os.environ('ID_GUILD_FAMILY')
-ID_CHANNEL_STDOUT_FAMILY = os.environ('ID_CHANNEL_STDOUT_FAMILY')
-ID_ME = os.environ('ID_ME')
-ID_SIS = os.environ('ID_SIS')
-ID_BRO = os.environ('ID_BRO')
-ID_MA = os.environ('ID_MA')
-ID_PA = os.environ('ID_PA')
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+ID_GUILD_FAMILY = os.getenv('ID_GUILD_FAMILY')
+ID_CHANNEL_STDOUT_FAMILY = os.getenv('ID_CHANNEL_STDOUT_FAMILY')
+ID_ME = os.getenv('ID_ME')
+ID_SIS = os.getenv('ID_SIS')
+ID_BRO = os.getenv('ID_BRO')
+ID_MA = os.getenv('ID_MA')
+ID_PA = os.getenv('ID_PA')
 # endregion
 
 # region [Bot initialization and error event]
@@ -31,7 +31,7 @@ bot.load_extensions_from("./Beeper/extensions")
 @bot.listen(hikari.StartedEvent)
 async def bot_started(event: hikari.StartedEvent) -> None:
     beepers_door = await bot.rest.fetch_channel(ID_CHANNEL_STDOUT_FAMILY)
-    await beepers_door.send(f'[{dt.now}] Hello Wren Family! Beeper is alive and running now!')
+    await beepers_door.send(f'[{dt.now().strftime("%Y-%m-%d %H:%M:%S")}] Hello Wren Family! Beeper is alive and running now!')
 
 
 @bot.listen(lightbulb.CommandErrorEvent)

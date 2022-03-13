@@ -1,2 +1,2 @@
 language = "python3"
-run = "startbot"
+run = "python3 Beeper/__main__.py"
