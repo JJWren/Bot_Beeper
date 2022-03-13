@@ -37,7 +37,7 @@ bot.load_extensions_from("./Beeper/extensions")
 @bot.listen(hikari.StartedEvent)
 async def bot_started(event: hikari.StartedEvent) -> None:
     beepers_door = await bot.rest.fetch_channel(ID_CHANNEL_STDOUT_FAMILY)
-    await beepers_door.send(f'[{dt.now().strftime("%Y-%m-%d %H:%M:%S")}] Hello Wren Family! Beeper is alive and running now!')
+    await beepers_door.send(f'[{dt.now().strftime("%Y-%m-%d %H:%M:%S")}] Hello Wren Family! I am alive and running now!')
 
 
 @bot.listen(lightbulb.CommandErrorEvent)
