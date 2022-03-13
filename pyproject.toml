@@ -5,8 +5,10 @@ description = ""
 authors = ["JJWren <<>>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.8,<3.11"
 Flask = "^2.0.3"
+hikari = "^2.0.0-alpha.107"
+hikari-lightbulb = "^2.2.0"
 
 [tool.poetry.dev-dependencies]
 
