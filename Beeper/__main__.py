@@ -1,28 +1,22 @@
 # region [Imports]
-from decimal import *
 import os
 import hikari
 import lightbulb
 import random
-from dotenv import load_dotenv
-from pathlib import Path
 from unicodedata import decimal
 from datetime import datetime as dt
 from keep_alive import keep_alive
 # endregion
 
 # region [Gather env secrets]
-dotenv_path = Path('env\SECRETS.env')
-load_dotenv(dotenv_path=dotenv_path)
-
-BOT_TOKEN = os.getenv('BOT_TOKEN')
-ID_GUILD_FAMILY = os.getenv('ID_GUILD_FAMILY')
-ID_CHANNEL_STDOUT_FAMILY = os.getenv('ID_CHANNEL_STDOUT_FAMILY')
-ID_ME = os.getenv('ID_ME')
-ID_SIS = os.getenv('ID_SIS')
-ID_BRO = os.getenv('ID_BRO')
-ID_MA = os.getenv('ID_MA')
-ID_PA = os.getenv('ID_PA')
+BOT_TOKEN = os.environ('BOT_TOKEN')
+ID_GUILD_FAMILY = os.environ('ID_GUILD_FAMILY')
+ID_CHANNEL_STDOUT_FAMILY = os.environ('ID_CHANNEL_STDOUT_FAMILY')
+ID_ME = os.environ('ID_ME')
+ID_SIS = os.environ('ID_SIS')
+ID_BRO = os.environ('ID_BRO')
+ID_MA = os.environ('ID_MA')
+ID_PA = os.environ('ID_PA')
 # endregion
 
 # region [Bot initialization and error event]
