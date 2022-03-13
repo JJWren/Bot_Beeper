@@ -8,7 +8,7 @@ from datetime import datetime as dt
 from Beeper import GUILD_ID, STDOUT_CHANNEL_ID
 
 # Gets Token from token.env file inside secrets folder (1 level up)
-with open("./secrets/token.env") as f:
+with open("./BeeperEnv/Secrets/token.env") as f:
     _token = f.read().strip()
 
 bot = lightbulb.BotApp(
