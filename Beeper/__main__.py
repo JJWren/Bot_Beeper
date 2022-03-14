@@ -21,8 +21,7 @@ ID_PA = os.getenv('ID_PA')
 
 # region [Bot initialization and error event]
 bot = lightbulb.BotApp(
-    token=BOT_TOKEN,
-    default_enabled_guilds=ID_GUILD_FAMILY
+    token=BOT_TOKEN
 )
 
 bot.load_extensions_from("./Beeper/extensions")
@@ -31,7 +30,12 @@ bot.load_extensions_from("./Beeper/extensions")
 @bot.listen(hikari.StartedEvent)
 async def bot_started(event: hikari.StartedEvent) -> None:
     beepers_door = await bot.rest.fetch_channel(ID_CHANNEL_STDOUT_FAMILY)
-    await beepers_door.send(f'[{dt.now().strftime("%Y-%m-%d %H:%M:%S")}] Hello! I am alive and running now!')
+    await beepers_door.send(f'Hello {ctx.}! I am alive and running now!')
+
+@bot.listen(hikari.StoppedEvent)
+async def bot_stopped(event: hikari.StoppedEvent) -> None:
+    beepers_door = await bot.rest.fetch_channel(ID_CHANNEL_STDOUT_FAMILY)
+    await beepers_door.send(f'Goodbye! I am going to rest for a bit.')
 
 
 @bot.listen(lightbulb.CommandErrorEvent)
