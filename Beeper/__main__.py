@@ -30,7 +30,7 @@ bot.load_extensions_from("./Beeper/extensions")
 @bot.listen(hikari.StartedEvent)
 async def bot_started(event: hikari.StartedEvent) -> None:
     beepers_door = await bot.rest.fetch_channel(ID_CHANNEL_STDOUT_FAMILY)
-    await beepers_door.send(f'Hello {ctx.}! I am alive and running now!')
+    await beepers_door.send(f'Hello! I am alive and running now!')
 
 @bot.listen(hikari.StoppedEvent)
 async def bot_stopped(event: hikari.StoppedEvent) -> None:
