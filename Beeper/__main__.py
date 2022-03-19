@@ -18,7 +18,7 @@ ID_PA = os.getenv('ID_PA')
 
 # region [Bot initialization and error event]
 bot = lightbulb.BotApp(
-    token=BOT_TOKEN,
+    token=os.getenv('BOT_TOKEN'),
     default_enabled_guilds=[os.getenv('ID_GUILD_FAMILY'), os.getenv('ID_GUILD_RITHOY')]
 )
 
