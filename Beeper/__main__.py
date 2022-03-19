@@ -1,22 +1,13 @@
 # region [Imports]
-from decimal import *
 import os
 import hikari
 import lightbulb
 import random
-from dotenv import load_dotenv
-from pathlib import Path
 from unicodedata import decimal
-from datetime import datetime as dt
 from keep_alive import keep_alive
 # endregion
 
 # region [Gather env secrets]
-dotenv_path = Path('env\SECRETS.env')
-load_dotenv(dotenv_path=dotenv_path)
-
-BOT_TOKEN = os.getenv('BOT_TOKEN')
-ID_GUILD_FAMILY = os.getenv('ID_GUILD_FAMILY')
 ID_CHANNEL_STDOUT_FAMILY = os.getenv('ID_CHANNEL_STDOUT_FAMILY')
 ID_ME = os.getenv('ID_ME')
 ID_SIS = os.getenv('ID_SIS')
@@ -27,8 +18,9 @@ ID_PA = os.getenv('ID_PA')
 
 # region [Bot initialization and error event]
 bot = lightbulb.BotApp(
-    token=BOT_TOKEN,
-    default_enabled_guilds=ID_GUILD_FAMILY
+    token=os.getenv('BOT_TOKEN'),
+    default_enabled_guilds=[
+        os.getenv('ID_GUILD_FAMILY'), os.getenv('ID_GUILD_RITHOY')]
 )
 
 bot.load_extensions_from("./Beeper/extensions")
@@ -37,7 +29,13 @@ bot.load_extensions_from("./Beeper/extensions")
 @bot.listen(hikari.StartedEvent)
 async def bot_started(event: hikari.StartedEvent) -> None:
     beepers_door = await bot.rest.fetch_channel(ID_CHANNEL_STDOUT_FAMILY)
-    await beepers_door.send(f'[{dt.now().strftime("%Y-%m-%d %H:%M:%S")}] Hello Wren Family! I am alive and running now!')
+    await beepers_door.send(f'Hello! I am alive and running now!')
+
+
+@bot.listen(hikari.StoppedEvent)
+async def bot_stopped(event: hikari.StoppedEvent) -> None:
+    beepers_door = await bot.rest.fetch_channel(ID_CHANNEL_STDOUT_FAMILY)
+    await beepers_door.send(f'Goodbye! I am going to rest for a bit.')
 
 
 @bot.listen(lightbulb.CommandErrorEvent)
@@ -85,6 +83,8 @@ async def hello(ctx: lightbulb.Context) -> None:
     # Dad
     elif str(ctx.user.id) == str(ID_PA):
         await ctx.respond('https://tenor.com/view/bugs-bunny-carrot-super-man-cape-gif-5666757')
+    else:
+        await ctx.respond(f'{random.choice(["https://tenor.com/view/forrest-gump-hello-wave-hi-waving-gif-22571528", "https://tenor.com/view/napoleon-dynamite-wave-bye-gif-15387504", "https://tenor.com/view/hey-there-turn-around-sassy-fabulous-hair-flip-gif-16899626"])}')
 
 
 @wave_group.child
@@ -106,6 +106,8 @@ async def bye(ctx: lightbulb.Context) -> None:
     # Dad
     elif str(ctx.user.id) == str(ID_PA):
         await ctx.respond('https://tenor.com/view/are-you-stupid-head-shake-farted-fart-gif-12278020')
+    else:
+        await ctx.respond(f'{random.choice(["https://tenor.com/view/awkward-the-simpsons-weirdo-roll-goodbye-gif-16982419", "https://tenor.com/view/ahaha-wave-bye-fearless-im-out-gif-14503554", "https://tenor.com/view/spongebob-plankton-goodbye-everyone-ill-remember-you-all-in-therapy-therapy-gif-21654437"])}')
 # endregion
 
 
@@ -122,7 +124,13 @@ async def roll_group(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d4', 'A four-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d4(ctx: lightbulb.Context) -> None:
-    num_of_die_rolled = int(ctx.options.num, base=10)
+    if ctx.options.num < 0:
+        await ctx.respond(f"You cannot roll a negative amount of dice.")
+        return
+    elif ctx.options.num == 0:
+        await ctx.respond(f"You didn't roll anything...")
+        return
+    num_of_die_rolled = int(ctx.options.num)
     if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
@@ -137,7 +145,13 @@ async def d4(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d6', 'A six-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d6(ctx: lightbulb.Context) -> None:
-    num_of_die_rolled = int(ctx.options.num, base=10)
+    if ctx.options.num < 0:
+        await ctx.respond(f"You cannot roll a negative amount of dice.")
+        return
+    elif ctx.options.num == 0:
+        await ctx.respond(f"You didn't roll anything...")
+        return
+    num_of_die_rolled = int(ctx.options.num)
     if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
@@ -152,7 +166,13 @@ async def d6(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d8', 'An eight-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d8(ctx: lightbulb.Context) -> None:
-    num_of_die_rolled = int(ctx.options.num, base=10)
+    if ctx.options.num < 0:
+        await ctx.respond(f"You cannot roll a negative amount of dice.")
+        return
+    elif ctx.options.num == 0:
+        await ctx.respond(f"You didn't roll anything...")
+        return
+    num_of_die_rolled = int(ctx.options.num)
     if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
@@ -167,7 +187,13 @@ async def d8(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d10', 'A ten-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d10(ctx: lightbulb.Context) -> None:
-    num_of_die_rolled = int(ctx.options.num, base=10)
+    if ctx.options.num < 0:
+        await ctx.respond(f"You cannot roll a negative amount of dice.")
+        return
+    elif ctx.options.num == 0:
+        await ctx.respond(f"You didn't roll anything...")
+        return
+    num_of_die_rolled = int(ctx.options.num)
     if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
@@ -182,7 +208,13 @@ async def d10(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d12', 'A twelve-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d12(ctx: lightbulb.Context) -> None:
-    num_of_die_rolled = int(ctx.options.num, base=10)
+    if ctx.options.num < 0:
+        await ctx.respond(f"You cannot roll a negative amount of dice.")
+        return
+    elif ctx.options.num == 0:
+        await ctx.respond(f"You didn't roll anything...")
+        return
+    num_of_die_rolled = int(ctx.options.num)
     if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
@@ -197,7 +229,13 @@ async def d12(ctx: lightbulb.Context) -> None:
 @lightbulb.command('d20', 'A twenty-sided die.')
 @lightbulb.implements(lightbulb.SlashSubCommand)
 async def d20(ctx: lightbulb.Context) -> None:
-    num_of_die_rolled = int(ctx.options.num, base=10)
+    if ctx.options.num < 0:
+        await ctx.respond(f"You cannot roll a negative amount of dice.")
+        return
+    elif ctx.options.num == 0:
+        await ctx.respond(f"You didn't roll anything...")
+        return
+    num_of_die_rolled = int(ctx.options.num)
     if num_of_die_rolled > 500:
         await ctx.respond(f"Use 500 or less dice. Max 2000 character limits in the text field.")
         return
@@ -215,6 +253,95 @@ async def d20(ctx: lightbulb.Context) -> None:
         message_response += 'A natural 20 occurred...\r'
         message_response += 'https://tenor.com/view/amazing-work-of-gumble-dnd-d20-natural-20-gif-14065301'
 
+    await ctx.respond(message_response)
+
+
+@bot.command
+@lightbulb.option('bonus', 'Cumulative modifiers and/or proficiency bonuses to add to the roll(s).', type=int)
+@lightbulb.option('d4', 'Number of d4 to roll.', type=int)
+@lightbulb.option('d6', 'Number of d6 to roll.', type=int)
+@lightbulb.option('d8', 'Number of d8 to roll.', type=int)
+@lightbulb.option('d10', 'Number of d10 to roll.', type=int)
+@lightbulb.option('d12', 'Number of d12 to roll.', type=int)
+@lightbulb.option('d20', 'Number of d20 to roll.', type=int)
+@lightbulb.command('big_roll', 'Roll a set of varying types of dice.')
+@lightbulb.implements(lightbulb.SlashCommand)
+async def big_roll(ctx: lightbulb.Context) -> None:
+    if ctx.options.d20 > 50 or ctx.options.d12 > 50 or ctx.options.d10 > 50 or ctx.options.d8 > 50 or ctx.options.d6 > 50 or ctx.options.d4 > 50:
+        await ctx.respond(f"Use 50 or less of each dice type. Max 2000 character limits in the text field.")
+        return
+    elif ctx.options.d20 < 0 or ctx.options.d12 < 0 or ctx.options.d10 < 0 or ctx.options.d8 < 0 or ctx.options.d6 < 0 or ctx.options.d4 < 0:
+        await ctx.respond(f"You cannot roll a negative amount of dice.")
+        return
+    elif ctx.options.d20 == 0 and ctx.options.d12 == 0 and ctx.options.d10 == 0 and ctx.options.d8 == 0 and ctx.options.d6 == 0 and ctx.options.d4 == 0:
+        await ctx.respond(f"You didn't roll anything...")
+        return
+
+    total = 0
+    crit_s = 0
+    crit_f = 0
+    all_rolls = {
+        'd20': [],
+        'd12': [],
+        'd10': [],
+        'd8': [],
+        'd6': [],
+        'd4': [],
+    }
+    message_response = f'{ctx.author.username}:\r'
+
+    if ctx.options.d20 > 0:
+        for idx in range(1, ctx.options.d20 + 1):
+            rand_num = random.choice([*range(1, 21)])
+            total += rand_num
+            all_rolls['d20'].append(rand_num)
+            if rand_num == 1:
+                crit_f += 1
+            elif rand_num == 20:
+                crit_s += 1
+        message_response += f'\tRolled {ctx.options.d20} D20: {all_rolls["d20"]}\r'
+        if crit_f > 0:
+            message_response += f'\t\t{crit_f} critical failures! :( \r'
+        if crit_s > 0:
+            message_response += f'\t\t{crit_s} critical successes! :D \r'
+
+    if ctx.options.d12 > 0:
+        for idx in range(1, ctx.options.d12 + 1):
+            rand_num = random.choice([*range(1, 13)])
+            total += rand_num
+            all_rolls['d12'].append(rand_num)
+        message_response += f'\tRolled {ctx.options.d12} D12: {all_rolls["d12"]}\r'
+
+    if ctx.options.d10 > 0:
+        for idx in range(1, ctx.options.d10 + 1):
+            rand_num = random.choice([*range(1, 11)])
+            total += rand_num
+            all_rolls['d10'].append(rand_num)
+        message_response += f'\tRolled {ctx.options.d10} D10: {all_rolls["d10"]}\r'
+
+    if ctx.options.d8 > 0:
+        for idx in range(1, ctx.options.d8 + 1):
+            rand_num = random.choice([*range(1, 9)])
+            total += rand_num
+            all_rolls['d8'].append(rand_num)
+        message_response += f'\tRolled {ctx.options.d8} D8: {all_rolls["d8"]}\r'
+
+    if ctx.options.d6 > 0:
+        for idx in range(1, ctx.options.d6 + 1):
+            rand_num = random.choice([*range(1, 7)])
+            total += rand_num
+            all_rolls['d6'].append(rand_num)
+        message_response += f'\tRolled {ctx.options.d6} D6: {all_rolls["d6"]}\r'
+
+    if ctx.options.d4 > 0:
+        for idx in range(1, ctx.options.d4 + 1):
+            rand_num = random.choice([*range(1, 5)])
+            total += rand_num
+            all_rolls['d4'].append(rand_num)
+        message_response += f'\tRolled {ctx.options.d4} D4: {all_rolls["d4"]}\r'
+
+    message_response += f'\tBonus: {ctx.options.bonus}\r'
+    message_response += f'\tTotal of Rolls with Bonus: {total + ctx.options.bonus}'
     await ctx.respond(message_response)
 
 
@@ -259,9 +386,5 @@ def die_roll(dice_type: int, num_of_dice: int) -> CompletedRoll:
 
 
 if __name__ == "__main__":
-    if os.name != "nt":
-        import uvloop
-        uv.loop.install()
-
     keep_alive()
     bot.run()
