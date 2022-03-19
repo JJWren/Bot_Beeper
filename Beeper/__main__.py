@@ -340,7 +340,7 @@ async def big_roll(ctx: lightbulb.Context) -> None:
             all_rolls['d4'].append(rand_num)
         message_response += f'\tRolled {ctx.options.d4} D4: {all_rolls["d4"]}\r'
 
-    message_response += f'\tBonus: {ctx.options.bonus}'
+    message_response += f'\tBonus: {ctx.options.bonus}\r'
     message_response += f'\tTotal of Rolls with Bonuses: {total + ctx.options.bonus}'
     await ctx.respond(message_response)
 
