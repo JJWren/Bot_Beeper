@@ -8,8 +8,6 @@ from keep_alive import keep_alive
 # endregion
 
 # region [Gather env secrets]
-BOT_TOKEN = os.getenv('BOT_TOKEN')
-ID_GUILD_FAMILY = os.getenv('ID_GUILD_FAMILY')
 ID_CHANNEL_STDOUT_FAMILY = os.getenv('ID_CHANNEL_STDOUT_FAMILY')
 ID_ME = os.getenv('ID_ME')
 ID_SIS = os.getenv('ID_SIS')
